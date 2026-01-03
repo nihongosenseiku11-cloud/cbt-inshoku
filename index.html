@@ -2,51 +2,75 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>CBT Soal Nguyen</title>
+<title>CBT Online</title>
 <style>
-body{font-family:Arial;padding:20px;background:#f4f4f4}
-.box{background:#fff;padding:20px;border-radius:8px}
-button{padding:10px 15px;margin-top:10px}
+body { font-family: Arial; background:#f2f2f2; padding:20px; }
+.box { background:white; padding:20px; border-radius:8px; }
+button { margin-top:10px; padding:10px; }
 </style>
 </head>
 <body>
 
 <div class="box">
-<h2>Soal CBT (Pilihan Ganda)</h2>
+<h2>Soal Pilihan Ganda</h2>
 <p id="soal"></p>
 
-<label><input type="radio" name="j" value="A"> <span id="a"></span></label><br>
-<label><input type="radio" name="j" value="B"> <span id="b"></span></label><br>
-<label><input type="radio" name="j" value="C"> <span id="c"></span></label><br>
-<label><input type="radio" name="j" value="D"> <span id="d"></span></label><br>
+<label><input type="radio" name="jawab" value="A"> <span id="opsiA"></span></label><br>
+<label><input type="radio" name="jawab" value="B"> <span id="opsiB"></span></label><br>
+<label><input type="radio" name="jawab" value="C"> <span id="opsiC"></span></label><br>
+<label><input type="radio" name="jawab" value="D"> <span id="opsiD"></span></label><br>
 
-<button onclick="cek()">Jawab</button>
+<button onclick="cekJawaban()">Jawab</button>
 <p id="hasil"></p>
 </div>
 
 <script>
-let soal=[
-{t:"Contoh soal 1?",a:"A",b:"B",c:"C",d:"D",k:"A"},
-{t:"Contoh soal 2?",a:"1",b:"2",c:"3",d:"4",k:"B"}
+let soal = [
+  {
+    t: "Contoh soal 1: 2 + 2 = ?",
+    A: "3",
+    B: "4",
+    C: "5",
+    D: "6",
+    kunci: "B"
+  },
+  {
+    t: "Contoh soal 2: Ibukota Jepang?",
+    A: "Osaka",
+    B: "Kyoto",
+    C: "Tokyo",
+    D: "Nagoya",
+    kunci: "C"
+  }
 ];
-let i=0;
 
-function tampil(){
-document.getElementById("soal").innerText=soal[i].t;
-a.innerText=soal[i].a;
-b.innerText=soal[i].b;
-c.innerText=soal[i].c;
-d.innerText=soal[i].d;
+let index = 0;
+
+function tampilSoal() {
+  document.getElementById("soal").innerText = soal[index].t;
+  document.getElementById("opsiA").innerText = soal[index].A;
+  document.getElementById("opsiB").innerText = soal[index].B;
+  document.getElementById("opsiC").innerText = soal[index].C;
+  document.getElementById("opsiD").innerText = soal[index].D;
 }
-function cek(){
-let j=document.querySelector('input[name="j"]:checked');
-if(!j)return;
-hasil.innerText=j.value==soal[i].k?"Benar":"Salah";
-i=(i+1)%soal.length;
-setTimeout(()=>{hasil.innerText="";tampil()},1000);
+
+function cekJawaban() {
+  let pilih = document.querySelector('input[name="jawab"]:checked');
+  if (!pilih) return;
+
+  let hasil = document.getElementById("hasil");
+  hasil.innerText =
+    pilih.value === soal[index].kunci ? "✅ Benar" : "❌ Salah";
+
+  index = (index + 1) % soal.length;
+  setTimeout(() => {
+    hasil.innerText = "";
+    tampilSoal();
+  }, 1000);
 }
-tampil();
+
+tampilSoal();
 </script>
 
 </body>
-</html> 
+</html>
