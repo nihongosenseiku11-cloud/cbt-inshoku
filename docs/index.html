@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>CBT Soal Nguyen</title>
+<style>
+body{font-family:Arial;padding:20px;background:#f4f4f4}
+.box{background:#fff;padding:20px;border-radius:8px}
+button{padding:10px 15px;margin-top:10px}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>Soal CBT (Pilihan Ganda)</h2>
+<p id="soal"></p>
+
+<label><input type="radio" name="j" value="A"> <span id="a"></span></label><br>
+<label><input type="radio" name="j" value="B"> <span id="b"></span></label><br>
+<label><input type="radio" name="j" value="C"> <span id="c"></span></label><br>
+<label><input type="radio" name="j" value="D"> <span id="d"></span></label><br>
+
+<button onclick="cek()">Jawab</button>
+<p id="hasil"></p>
+</div>
+
+<script>
+let soal=[
+{t:"Contoh soal 1?",a:"A",b:"B",c:"C",d:"D",k:"A"},
+{t:"Contoh soal 2?",a:"1",b:"2",c:"3",d:"4",k:"B"}
+];
+let i=0;
+
+function tampil(){
+document.getElementById("soal").innerText=soal[i].t;
+a.innerText=soal[i].a;
+b.innerText=soal[i].b;
+c.innerText=soal[i].c;
+d.innerText=soal[i].d;
+}
+function cek(){
+let j=document.querySelector('input[name="j"]:checked');
+if(!j)return;
+hasil.innerText=j.value==soal[i].k?"Benar":"Salah";
+i=(i+1)%soal.length;
+setTimeout(()=>{hasil.innerText="";tampil()},1000);
+}
+tampil();
+</script>
+
+</body>
+</html>
